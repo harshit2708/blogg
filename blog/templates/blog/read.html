@@ -1,17 +1,51 @@
 {% extends 'blog/basic.html' %}
 {% load static%}
-{% block css %} 
-<link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}"> 
+{% block title%} Read {% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}">
 {% endblock %}
 {% block body %}
 <div class="container my-5">
-	<div class="image">
-	<img src="/media/{{blog.image}}" style="width: 70%; height: 450px; margin-top: 50px; display: block; margin: auto;">
-</div>
-<h1 style="text-align : center;">{{blog.title}}</h1>
-<br>
-<div style="text-align: right; opacity: 0.8;">{{blog.pub_date}}</div>
-<hr style="background-color: #FF9224;">
-{{blog.content}}
+    <div class="image">
+        <img src="/media/{{blog.image}}" style="width: 70%; height: 450px; margin-top: 50px; display: block; margin: auto;">
+    </div>
+    <h1 style="text-align : center; margin-top: 25px;">{{blog.title}}</h1>
+    <br>
+    <div style="text-align: right; opacity: 0.8;">
+        <p>{{blog.pub_date}}</p>
+        <p>By:{{blog.user_name}}</p>
+    </div>
+    <hr style="background-color: #FF9224;">
+    {{blog.content}}
+    <br><br>
+    <div class="comment_box">
+        <h2>Comments</h2>
+        <form method="post">
+            {%csrf_token%}
+            <div class="form-group">
+                <label for="inputTitle"></label>
+                <input type="text" name="comment" class="form-control" id="comment" placeholder="Add a Comment">
+            </div>
+            <button type="submit">Comment</button>
+            <br>
+            <div class="show_comments my-3" style="background-color:rgba(243, 243, 247, 0.5);">
+                {% if message%}
+                <h4>No comments yet.</h4>
+                {% else%}
+                {% for comment_n in comments %}
+                <div>
+                    <span class="name" style="color: #FF9224;">
+                        {{comment_n.comment_by}}</span>
+                    <br>
+                    {{comment_n.comment}}
+                    <br>
+                    {{comment_n.date}}
+                    <hr>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

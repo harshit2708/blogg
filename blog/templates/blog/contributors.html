@@ -1,0 +1,53 @@
+{% extends 'blog/basic.html' %}
+{% load static%}
+{% block title%} Read {% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}">
+{% endblock %}
+{% block body %}
+<div class="container my-5">
+	<h2 style="text-align: center;">Our Contributors</h2>
+	<div class="contributor_text" style="font-size: 30px;">A great thanks to the people who are helping us in this blogging community bigger by writing blogs on the platform.</div>
+    <div class="card overflow-hidden my-5">
+        <!-- Tab Content -->
+        <div class="tab-content" id="leaderboardTabContent">
+            <div class="tab-pane fade show active" id="all-time" role="tabpanel" aria-labelledby="all-time-tab">
+                <table class="table table-borderless table-thead-bordered table-nowrap table-text-center table-align-middle card-table">
+                    <thead  style="background-color: rgb(255, 146, 36,0.8);">
+                        <tr>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Number of Blogs</th>
+                        </tr>
+                    <tbody>
+                    	{% for result in results%}
+                        <tr>
+                            <td style="color: black;"><span class="text-warning" style="font-size: 1.5rem;">
+                            {% if forloop.counter == 1%}
+                            🥇
+                       {% elif forloop.counter == 2 %}
+                            🥈
+                        {% elif forloop.counter == 3 %}
+                            🥉
+                            {% else %}
+                            {{forloop.counter}}
+                        {% endif %}
+                    </span></td>
+                            <td >
+                                <a class="d-flex align-items-center" href="#" style="color: #FF9224;">
+                                    <div class="ml-10">
+                                        <span class="d-block h5 text-hover-primary mb-0">{{result.user_name}}</span>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>{{result.bcount}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

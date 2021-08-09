@@ -1,19 +1,27 @@
 {% extends 'blog/basic.html' %}
 {% load static%}
+{% block title%} My Blogs {% endblock %}
 {% block css %} 
 <link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}"> 
 <link rel="stylesheet" type="text/css" href="{% static 'blog/myblogs.css' %}">
 {% endblock %}
 {% block body %}
 <div class="container-fluid my-3">
-<h1 style="text-align: center;">My Blogs</h1>    
-
+<h1 style="text-align: center;">My Blogs</h1> 
+{% if my_blog == None %}
+ <div style="float: right;"><a href="{% url 'write' %}"><button class="write"><span>Write a Blog</span></button></a> </div> 
+ {% else %}
+<div style="float: right;"><a href="{% url 'write' %}"><button class="write"><span>Write another Blog</span></button></a> </div> 
+{% endif %}
+{% if my_blog == None %}
+<h3> You have not posted any blog yet..</h3>
+{% endif %}
 <section class="cards-wrapper">
 
 {% for blog in my_blogs %}
   <div class="card-grid-space">
     <div class="num">{{forloop.counter}}</div>
-    <a class="card" href="#" style="--bg-img: url(/media/{{blog.image}})">
+    <a class="card" href="{% url 'read' blog.blog_id%}" style="--bg-img: url(/media/{{blog.image}})">
       <div>
         <h1>{{blog.title}}</h1>
         <p>{{blog.content|slice:"0:150"}}...</p>

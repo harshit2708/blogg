@@ -1,5 +1,6 @@
 {% extends 'blog/basic.html' %}
 {% load static%}
+{% block title%} Write {% endblock %}
 {% block css %} 
 <link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}"> 
 {% endblock %}
@@ -9,7 +10,7 @@
 <form  method="post" enctype="multipart/form-data"> 
 	{% csrf_token %}
     <div class="form-group">
-       <label for="category">Choose a car:</label>
+       <label for="category">Choose a Category:</label>
   <select name="category" id="cars">
     <option value="Electronics">Electronics</option>
     <option value="Fashion">Fashion</option>
@@ -21,15 +22,16 @@
   
   <div class="form-group">
     <label for="inputTitle">Title</label>
-    <input type="text" name = "title"class="form-control" id="title" placeholder="Title">
+    <input type="text" name = "title"class="form-control" id="title" placeholder="Title" required>
   </div>
+   Content
   <div class="form-group">
-    <label for="inputContent">Content</label>
-    <input type="text" name="content" class="form-control" id="content" placeholder="Content">
+
+    <textarea name="content" rows="10" cols="60" required></textarea>
   </div>
     <div class="form-group">
     <label for="image">Image</label>
- <input type="file" id="image" name="image">  </div>
+ <input type="file" id="image" name="image" required=>  </div>
 
   
   <button type="submit">Submit</button>

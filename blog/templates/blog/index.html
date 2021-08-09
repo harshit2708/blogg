@@ -1,5 +1,6 @@
 {% extends 'blog/basic.html' %}
 {% load static%}
+{% block title%} Blogg {% endblock %}
 {% block css %} 
 <link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}"> 
 {% endblock %}
@@ -18,7 +19,7 @@
 				Post your blogs here and read other's blogs too.... 
 				<br><br>
 				<a href="{% url 'blogs'%}"><button class="read"><span>Read Blog</span></button></a>
-				<a href="{% url 'write'%}"></a><button class="write"><span>Write a Blog</span></button>
+				<a href="{% url 'write' %}"><button class="write"><span>Write a Blog</span></button></a>
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,6 @@
 {% extends "blog/basic.html" %}
 {% load static%}
+{% block title%} Register {% endblock %}
 {% block css %} 
 <link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}"> 
 {% endblock %}
@@ -14,27 +15,28 @@
 <h2>Register</h2>
 
     {% if message %}
-        <div>{{ message }}</div>
+        <div style="color: red">{{ message }}</div>
     {% endif %}
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
+            <input class="form-control" type="email" name="email" placeholder="Email Address" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="username" placeholder="Username">
+            <input class="form-control" type="text" name="username" placeholder="Username" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
+            <input class="form-control" type="password" name="password" placeholder="Password" required >
         </div>
         <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
         </div>
         <button type="submit">Submit</button>
 
     </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    Already have an account? <a href="{% url 'login' %}" style="color: #FF9224;">Log In here.</a>
 </div></div></div>
+<br><br>
 
 {% endblock %}
