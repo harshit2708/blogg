@@ -1,0 +1,18 @@
+button
+{
+	background-color: #FF9224;
+	color: #FFFFFF;
+	border-radius: 30px;
+	border: none;
+	width: 10em;
+	height: 3em;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+}
+button:focus{
+	outline: none;
+}
+button:hover{
+	opacity: 0.95;
+}

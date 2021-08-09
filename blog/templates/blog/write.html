@@ -1,0 +1,38 @@
+{% extends 'blog/basic.html' %}
+{% load static%}
+{% block css %} 
+<link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}"> 
+{% endblock %}
+{% block body %}
+
+<div class="container my-5">
+<form  method="post" enctype="multipart/form-data"> 
+	{% csrf_token %}
+    <div class="form-group">
+       <label for="category">Choose a car:</label>
+  <select name="category" id="cars">
+    <option value="Electronics">Electronics</option>
+    <option value="Fashion">Fashion</option>
+    <option value="Technology">Technology</option>
+    <option value="Architecture">Architecture</option>
+    <option value="Other">Other</option>
+  </select>
+    </div>
+  
+  <div class="form-group">
+    <label for="inputTitle">Title</label>
+    <input type="text" name = "title"class="form-control" id="title" placeholder="Title">
+  </div>
+  <div class="form-group">
+    <label for="inputContent">Content</label>
+    <input type="text" name="content" class="form-control" id="content" placeholder="Content">
+  </div>
+    <div class="form-group">
+    <label for="image">Image</label>
+ <input type="file" id="image" name="image">  </div>
+
+  
+  <button type="submit">Submit</button>
+</form>
+</div>     
+{% endblock %}
