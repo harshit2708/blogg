@@ -12,27 +12,59 @@
     <div class="form-group">
        <label for="category">Choose a Category:</label>
   <select name="category" id="cars">
+    {%if blog.category == "Electronics"%}
+    <option value="Electronics" selected>Electronics</option>
+    {%else%}
     <option value="Electronics">Electronics</option>
+    {%endif%}
+
+    {%if blog.category == "Fashion"%}
+    <option value="Fashion" selected>Fashion</option>
+    {%else%}
     <option value="Fashion">Fashion</option>
+    {%endif%}
+
+    {%if blog.category == "Technology"%}
+    <option value="Technology" selected>Technology</option>
+    {%else%}
     <option value="Technology">Technology</option>
+    {%endif%}
+
+    {%if blog.category == "Architecture"%}
+    <option value="Architecture" selected>Architecture</option>
+    {%else%}
     <option value="Architecture">Architecture</option>
+    {%endif%}
+
+
+    {%if blog.category == "Other"%}
+    <option value="Other" selected>Other</option>
+    {%else%}
     <option value="Other">Other</option>
-  </select>
+    {%endif%}
+
+
+      </select>
     </div>
   
   <div class="form-group">
     <label for="inputTitle">Title</label>
-    <input type="text" name = "title"class="form-control" id="title" placeholder="Title" required>
+    <input type="text" name = "title"class="form-control" id="title" placeholder="Title" value = "{{blog.title}}"required >
   </div>
    Content
   <div class="form-group">
 
-    <textarea name="content" rows="10" cols="60" required></textarea>
+    <textarea name="content" rows="10" cols="60"  required>{{blog.content}}</textarea>
   </div>
     <div class="form-group">
-    <label for="image">Image</label>
- <input type="file" id="image" name="image" required=>  </div>
+      {% if edit %}
+    <label for="image">Replace Image?</label>
+ <input type="file" id="image" name="image" value = "{{blog.image}}" >  </div>
+ {% else %}
+ <label for="image">Image</label>
+ <input type="file" id="image" name="image" value = "{{blog.image}}" required>  </div>
 
+{% endif%}
   
   <button type="submit">Submit</button>
 </form>

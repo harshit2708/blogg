@@ -1,19 +1,19 @@
 {% extends 'blog/basic.html' %}
 {% load static%}
 {% block title%} My Blogs {% endblock %}
-{% block css %} 
-<link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}"> 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/index.css'%}">
 <link rel="stylesheet" type="text/css" href="{% static 'blog/myblogs.css' %}">
 {% endblock %}
 {% block body %}
-<div class="container-fluid my-3">
-<h1 style="text-align: center;">My Blogs</h1> 
+<div class="all_blogs container-fluid my-3">
+<h1 style="text-align: center;">My Blogs</h1>
 {% if my_blog == None %}
- <div style="float: right;"><a href="{% url 'write' %}"><button class="write"><span>Write a Blog</span></button></a> </div> 
+ <div style="float: right;"><a href="{% url 'write' %}"><button class="write"><span>Write a Blog</span></button></a> </div>
  {% else %}
-<div style="float: right;"><a href="{% url 'write' %}"><button class="write"><span>Write another Blog</span></button></a> </div> 
+<div style="float: right;"><a href="{% url 'write' %}"><button class="write"><span>Write another Blog</span></button></a> </div>
 {% endif %}
-{% if my_blog == None %}
+{% if check %}
 <h3> You have not posted any blog yet..</h3>
 {% endif %}
 <section class="cards-wrapper">
@@ -21,22 +21,70 @@
 {% for blog in my_blogs %}
   <div class="card-grid-space">
     <div class="num">{{forloop.counter}}</div>
-    <a class="card" href="{% url 'read' blog.blog_id%}" style="--bg-img: url(/media/{{blog.image}})">
-      <div>
-        <h1>{{blog.title}}</h1>
-        <p>{{blog.content|slice:"0:150"}}...</p>
-        <div class="date">{{blog.pub_date}} <br></div>
-        <div class="tags">
-          <div class="tag">{{blog.category}}</div>
-        </div>
+                                <a class="card" href="{% url 'read' blog.blog_id %}" style="--bg-img: url(/media/{{blog.image}})">
+                                    <div class = "views" style="margin-top: 4%;"><i class="fa fa-eye" aria-hidden="true">  {{blog.total_views}}</i></div>
+
+                    <div>
+                        <h2>{{blog.title|slice:"0:50"}}</h2>
+                        <p>{{blog.content|slice:"0:150"}}...</p>
+                        <div class="date">{{blog.pub_date}} <br></div>
+
+
+                        <div class="tags">
+                            <div class="tag">{{blog.category}}</div>
+                        </div>
+                    </div>
+                </a>
+    <!--a href="#" class="btn btn-warning btn-lg"></a>
+    {% csrf_token %}
+    <form action="#" method="post" class="d-inline">
+      <button type="submit" style="background-color: red;">Submit</button>
+    </form-->
+<br>
+<a href="{% url 'edit_blog' blog.blog_id %}">
+<button class = "delete" style="background-color: #FF9224;border-radius: 30px;color: white; width: 10em;"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>Edit</button>
+</a>
+
+
+<form action="{% url 'delete_blog' blog.blog_id %}" method="post">
+   {% csrf_token %}
+
+<button type = "submit" class = "delete" ><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+Delete</button>
+</form>
+<!--div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+  {% csrf_token %}
+  <form class="modal-content" action="{% url 'delete_blog' blog.blog_id %}">
+    <div class="container">
+      <h1>Delete Account</h1>
+      <p>Are you sure you want to delete your account?</p>
+    
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
       </div>
-    </a>
-  </div>
-   
+    </div>
+  </form>
+</div-->
+    
+</div>
+
 {% endfor %}
     <!-- https://images.unsplash.com/photo-1520839090488-4a6c211e2f94?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=38951b8650067840307cba514b554ba5&auto=format&fit=crop&w=1350&q=80 -->
 
 </section>
 </div>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 
 {% endblock %}

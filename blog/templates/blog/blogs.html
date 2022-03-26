@@ -72,16 +72,20 @@ padding-right: 0;
     </div>
  </div>
     <div class="all_blogs my-5">
-           <h1 style="text-align: center;">All Blogs</h1>
+           <h1 style="text-align: center; ">All Blogs</h1>
         <section class="cards-wrapper">
             {% for blog in blogs %}
             <div class="card-grid-space">
                 <div class="num">{{forloop.counter}}</div>
-                <a class="card" href="{% url 'read' blog.blog_id %}" style="--bg-img: url(/media/{{blog.image}})">
+                                <a class="card" href="{% url 'read' blog.blog_id %}" style="--bg-img: url(/media/{{blog.image}})">
+                                    <div class = "views" style="margin-top: 4%;"><i class="fa fa-eye" aria-hidden="true">  {{blog.total_views}}</i></div>
+
                     <div>
-                        <h1>{{blog.title}}</h1>
+                        <h2>{{blog.title|slice:"0:50"}}</h2>
                         <p>{{blog.content|slice:"0:150"}}...</p>
                         <div class="date">{{blog.pub_date}} <br></div>
+
+
                         <div class="tags">
                             <div class="tag">{{blog.category}}</div>
                         </div>

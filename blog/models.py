@@ -14,6 +14,10 @@ class Blog(models.Model):
     content = models.CharField(max_length = 10000)
     pub_date = models.DateField(auto_now_add=True)
     image = models.FileField(upload_to='blog/images', default="")
+    views = models.ManyToManyField(User,related_name = "post_views", default = 0)
+
+    def total_views(self):
+        return self.views.count()
  
 class Comment(models.Model):
     blog_id = models.CharField(max_length = 4)
